@@ -17,7 +17,7 @@ Before SQL analysis, an ETL process was performed using **Python (`pandas`)** to
 
 * **Data Sampling:** Extracted a 10,000-row subset of transactions for rapid query testing while maintaining relational integrity with the `users` and `cards` tables.
 * **Data Cleaning:** Removed financial symbols (`$`, `,`) and converted strings to proper numeric data types.
-* **Output:** Cleaned data was exported as CSV files and loaded into a MySQL database schema. *(See `etl_pipeline/credit_cards.ipynb`)*.
+* **Output:** Cleaned data was exported as CSV files and loaded into a MySQL database schema. *(See `credit_cards.ipynb`)*.
 
 ---
 
@@ -41,11 +41,11 @@ Before SQL analysis, an ETL process was performed using **Python (`pandas`)** to
 
 ---
 
-## 👑 3. Customer 360 Profitability View
+## 👑 3. Customer Profitability View
 *(See `sql_scripts/5_customer_profitability_view.sql`)*
 
 A master flat table was created using **CTEs** and **LEFT JOINs** to combine demographic data (`users`), credit risk factors (`cards`), and behavioral metrics (`transactions`). `COALESCE()` was utilized to cleanly handle inactive users with zero transactions.
 
 **Key Findings from Top Spenders:**
 * **Strong Purchasing Power in the 50+ Demographic:** The top 5 highest-spending customers in the sample are all over the age of 50. The #1 overall spender (User 96, Age 69) generated **$2,690.02** over just 4 days. This indicates that customer acquisition and premium card marketing efforts should heavily target the senior demographic.
-* **High Spend vs. Credit Risk:** The #2 overall spender (User 1168) generated **$2,471.05** in transaction volume and belongs to the 'High Income' tier. However, this user has a high-risk credit score of only **505**. This validates the necessity of a consolidated "Customer 360" view—looking at transaction volume or income alone would obscure the significant default risk this individual poses to the institution.
+* **High Spend vs. Credit Risk:** The #2 overall spender (User 1168) generated **$2,471.05** in transaction volume and belongs to the 'High Income' tier. However, this user has a high-risk credit score of only **505**. This validates the necessity of a consolidated customer view—looking at transaction volume or income alone would obscure the significant default risk this individual poses to the institution.
